@@ -1,14 +1,18 @@
 package com.sep6.app.model;
 
+import jakarta.persistence.Id;
+
 import java.io.Serializable;
 
 public class StarId implements Serializable {
-    private Integer movieId;
-    private Integer personId;
+    @Id
+    private Integer movie_id;
+    @Id
+    private Integer person_id;
 
-    public StarId(Integer movieId, Integer personId) {
-        this.movieId = movieId;
-        this.personId = personId;
+    public StarId(Integer movie_id, Integer person_id) {
+        this.movie_id = movie_id;
+        this.person_id = person_id;
     }
 
     public StarId(){}

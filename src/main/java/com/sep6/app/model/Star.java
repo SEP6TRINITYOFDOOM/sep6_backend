@@ -6,26 +6,26 @@ import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "star")
+@Table(name = "stars")
 @IdClass(StarId.class)
 public class Star {
     @Id
-    private Integer movieId;
+    private Integer movie_id;
 
     @Id
-    private Integer personId;
+    private Integer person_id;
 
     public Integer getMovieId() {
-        return movieId;
+        return movie_id;
     }
 
     public Integer getPersonId() {
-        return personId;
+        return person_id;
     }
 
-    public Star(Integer movieId, Integer personId){
-        this.movieId = movieId;
-        this.personId = personId;
+    public Star(Integer movie_id, Integer person_id){
+        this.movie_id = movie_id;
+        this.person_id = person_id;
     }
 
     public Star(){

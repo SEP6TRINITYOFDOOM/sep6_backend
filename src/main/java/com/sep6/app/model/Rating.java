@@ -1,28 +1,36 @@
 package com.sep6.app.model;
 
-import jakarta.persistence.*;
-import org.joda.time.DateTime;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+import java.sql.Timestamp;
 
 import static jakarta.persistence.GenerationType.AUTO;
 
 @Entity()
-@Table(name = "rating")
+@Table(name = "ratings")
 public class Rating {
 
     @Id
     @GeneratedValue(strategy = AUTO)
-    private Integer id;
+    private Integer movie_id;
 
 //    @ForeignKey(name = )
-    private Integer userId;
+    //private Integer userId;
 
     //    @ForeignKey(name = )
-    private Integer movieId;
+    //private Integer movie_id;
 
-    private Integer ratingValue;
+    private Double rating;
 
-    private DateTime createdOn;
-    private DateTime updatedOn;
+    private Integer votes;
+
+
+
+    //private Timestamp createdOn;
+    //private Timestamp updatedOn;
 
     public Rating(){}
 
