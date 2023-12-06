@@ -1,13 +1,9 @@
 package com.sep6.app.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.time.LocalDate;
 
-@Setter
-@Getter
 @Entity
 @Table(name = "movies")
 public class Movie {
@@ -45,5 +41,53 @@ public class Movie {
 
     public Movie() {
 
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public LocalDate getCreated_on() {
+        return created_on;
+    }
+
+    public void setCreated_on(LocalDate created_on) {
+        this.created_on = created_on;
+    }
+
+    public LocalDate getUpdated_on() {
+        return updated_on;
+    }
+
+    public void setUpdated_on(LocalDate updated_on) {
+        this.updated_on = updated_on;
+    }
+
+    public int getGenre_id() {
+        return genre_id;
+    }
+
+    public void setGenre_id(int genre_id) {
+        this.genre_id = genre_id;
     }
 }
