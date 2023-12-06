@@ -1,21 +1,25 @@
 package com.sep6.app.controller;
 
-import com.sep6.app.model.Movie;
-import com.sep6.app.repository.MovieRepository;
+import com.sep6.app.TrendingMovie;
+import com.sep6.app.service.MovieService;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 public class MovieController {
 
-    private final MovieRepository movieRepository;
+    //private final MovieRepository movieRepository;
+    private final MovieService movieService;
 
-    public MovieController(MovieRepository movieRepository) {
-        this.movieRepository = movieRepository;
+    public MovieController(/*MovieRepository movieRepository, */MovieService movieService) {
+        //this.movieRepository = movieRepository;
+        this.movieService = movieService;
     }
 
-    @GetMapping("/sayHello")
+    /*@GetMapping("/sayHello")
     public String sayHello(){
         return "Hello";
     }
@@ -25,6 +29,21 @@ public class MovieController {
         return this.movieRepository.findAll();
     }
 
+    @GetMapping("/movies/{title}")
+    public List<Movie> findMovieByTitle(@PathVariable String title){
+        return this.movieRepository.findByTitle(title);
+    }
 
+    @GetMapping("/movies/{genre}")
+    public List<Movie> findMovieByTitle(@PathVariable int genre){
+        return this.movieRepository.findByGenre(genre);
+    }*/
+
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/movies/trending")
+    public List<TrendingMovie> getTrendingMovies(){
+        return this.movieService.getTrendingMovies();
+    }
 
 }
