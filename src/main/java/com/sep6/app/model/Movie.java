@@ -2,7 +2,7 @@ package com.sep6.app.model;
 
 import jakarta.persistence.*;
 @Entity
-@Table(name = "movies")
+@Table(name = "movie")
 public class Movie {
 
     @Id
