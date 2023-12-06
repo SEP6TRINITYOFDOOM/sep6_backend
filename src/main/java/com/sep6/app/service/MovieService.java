@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Locale;
 
 @Slf4j
-
 @Service
 public class MovieService
 {
