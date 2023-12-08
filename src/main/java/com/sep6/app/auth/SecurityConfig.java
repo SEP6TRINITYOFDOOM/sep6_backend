@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
@@ -42,8 +43,10 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests((authorize) -> authorize.anyRequest().authenticated())
-                .csrf((csrf) -> csrf.ignoringRequestMatchers("/api/auth"))
+                .cors(Customizer.withDefaults())
+//                .authorizeHttpRequests((authorize) -> authorize.anyRequest().permitAll())
+//                .csrf((csrf) -> csrf.ignoringRequestMatchers("/api/auth"))
+                .csrf(AbstractHttpConfigurer::disable)
                 .httpBasic(Customizer.withDefaults())
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
                 .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -55,12 +58,12 @@ public class SecurityConfig {
     }
 
     @Bean
-    public UserDetailsService userDetailsService(){
+    public UserDetailsService userDetailsService() {
         return new SepUserDetailsService();
     }
 
     @Bean
-    public JwtDecoder jwtDecoder(){
+    public JwtDecoder jwtDecoder() {
         return NimbusJwtDecoder.withPublicKey(this.publicKey).build();
     }
 

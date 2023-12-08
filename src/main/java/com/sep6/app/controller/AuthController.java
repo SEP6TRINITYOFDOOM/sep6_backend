@@ -13,7 +13,7 @@ import java.time.Instant;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("api/auth")
 public class AuthController {
 
     private final JwtEncoder jwtEncoder;
@@ -23,6 +23,7 @@ public class AuthController {
     }
 
     @PostMapping("")
+//    @PermitAll
     public String auth(Authentication authentication) {
         Instant now = Instant.now();
         long expiry = 999999;
@@ -41,5 +42,6 @@ public class AuthController {
                 .build();
 
         return this.jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
+//        return "";
     }
 }
