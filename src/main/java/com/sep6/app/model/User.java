@@ -14,6 +14,10 @@ public class User {
     private String username;
     private String password;
 
+    public User() {
+
+    }
+
     public Integer getId() {
         return id;
     }
@@ -29,4 +33,10 @@ public class User {
     public String getPassword() {
         return password;
     }
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 }
+
