@@ -2,17 +2,19 @@ package com.sep6.app.model;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.sep6.app.*;
 import com.sep6.app.Movie;
 
 public class SearchResults
 {
-    private ArrayList<Actor> actorResults;
-    private ArrayList<Movie> movieResults;
+    private ArrayList<SearchActor> actorResults;
+    private ArrayList<SearchMovie> movieResults;
 
-    public SearchResults(ArrayList<Actor> personResults, ArrayList<Movie> movierResults)
+    public SearchResults(ArrayList<SearchActor> actorResults, ArrayList<SearchMovie> movieResults)
     {
-        this.actorResults = personResults;
-        this.movieResults = movierResults;
+        this.actorResults = actorResults;
+        this.movieResults = movieResults;
     }
 
     public SearchResults()
@@ -21,22 +23,22 @@ public class SearchResults
         this.movieResults = new ArrayList<>();
     }
 
-    public ArrayList<Actor> getPersonResults()
+    public ArrayList<SearchActor> getActorResults()
     {
         return actorResults;
     }
 
-    public void setPersonResults(ArrayList<Actor> personResults)
+    public void setActorResults(ArrayList<SearchActor> actorResults)
     {
-        this.actorResults = personResults;
+        this.actorResults = actorResults;
     }
 
-    public ArrayList<Movie> getMovieResults()
+    public ArrayList<SearchMovie> getMovieResults()
     {
         return movieResults;
     }
 
-    public void setMovieResults(ArrayList<Movie> movieResults)
+    public void setMovieResults(ArrayList<SearchMovie> movieResults)
     {
         this.movieResults = movieResults;
     }
