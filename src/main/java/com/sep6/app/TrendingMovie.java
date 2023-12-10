@@ -1,15 +1,19 @@
-package com.sep6.app.model;
-
-import jakarta.persistence.*;
+package com.sep6.app;
 
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "movies")
-public class Movie {
+public class TrendingMovie {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    public TrendingMovie(Integer id,String title,int year, int genre_id, String poster_path){
+        this.id = id;
+        this.title = title;
+        this.year = year;
+        this.genre_id = genre_id;
+        this.path = poster_path;
+        this.created_on = LocalDate.now();
+        this.updated_on = LocalDate.now();
+    }
+
     private Integer id;
 
     private String title;
@@ -17,31 +21,12 @@ public class Movie {
     private int year;
 
     private LocalDate created_on;
-    
+
     private LocalDate updated_on;
 
     private int genre_id;
 
-    public Movie(String title, int year, int genre_id){
-        this.title = title;
-        this.year = year;
-        this.genre_id = genre_id;
-        this.created_on = LocalDate.now();
-        this.updated_on = LocalDate.now();
-    }
-
-    public Movie(int id, String title, int year, int genre_id ){
-        this.id = id;
-        this.title = title;
-        this.year = year;
-        this.genre_id = genre_id;
-        this.created_on = LocalDate.now();
-        this.updated_on = LocalDate.now();
-    }
-
-    public Movie() {
-
-    }
+    private String path;
 
     public Integer getId() {
         return id;
@@ -89,5 +74,13 @@ public class Movie {
 
     public void setGenre_id(int genre_id) {
         this.genre_id = genre_id;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 }
