@@ -15,7 +15,7 @@ public class DataSourceConfig {
         dataSource.setDriverClassName("org.postgresql.Driver");
         dataSource.setUrl("jdbc:postgresql://localhost:5432/postgres");
         dataSource.setUsername("postgres");
-        dataSource.setPassword("root");
+        dataSource.setPassword("postgres");
 
         return dataSource;
     }

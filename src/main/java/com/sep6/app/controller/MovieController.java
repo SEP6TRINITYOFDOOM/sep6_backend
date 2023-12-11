@@ -1,15 +1,12 @@
 package com.sep6.app.controller;
 
-import com.sep6.app.Movie;
-import com.sep6.app.TrendingMovie;
+import com.sep6.app.MovieTMDB;
 import com.sep6.app.service.MovieService;
 import com.sep6.app.service.movieDTO.MovieDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 public class MovieController {
@@ -53,7 +50,7 @@ public class MovieController {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/movies/trending")
-    public Movie[] getTrendingMovies(){
+    public MovieTMDB[] getTrendingMovies(){
         return this.movieService.getTrendingMovies();
     }
 

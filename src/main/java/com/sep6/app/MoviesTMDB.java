@@ -1,13 +1,13 @@
 package com.sep6.app;
 
-public class TrendingMovies {
+public class MoviesTMDB {
 
-    public TrendingMovies(){
+    public MoviesTMDB(){
 
     }
 
     int page;
-    Movie[] results;
+    MovieTMDB[] results;
     int total_pages;
     int total_results;
 
@@ -19,11 +19,11 @@ public class TrendingMovies {
         this.page = page;
     }
 
-    public Movie[] getResults() {
+    public MovieTMDB[] getResults() {
         return results;
     }
 
-    public void setResults(Movie[] results) {
+    public void setResults(MovieTMDB[] results) {
         this.results = results;
     }
 

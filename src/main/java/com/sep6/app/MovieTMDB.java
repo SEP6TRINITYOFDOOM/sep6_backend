@@ -1,7 +1,7 @@
 package com.sep6.app;
 
-public class Movie {
-    public Movie(){
+public class MovieTMDB {
+    public MovieTMDB(){
 
     }
 

@@ -1,15 +1,11 @@
 package com.sep6.app.service;
 
-import com.sep6.app.Actor;
-import com.sep6.app.TrendingActor;
-import com.sep6.app.TrendingActors;
+import com.sep6.app.ActorTMDB;
+import com.sep6.app.ActorsTMDB;
 import com.sep6.app.repository.ActorRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Slf4j
 @Service
@@ -21,7 +17,7 @@ public class ActorService {
         this.actorRepository = actorRepository;
     }
 
-    public Actor[] getTrendingActors(){
+    public ActorTMDB[] getTrendingActors(){
 
         WebClient.Builder builder = WebClient.builder();
 
@@ -29,15 +25,15 @@ public class ActorService {
 
         builder.defaultHeader("Token","eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZGMyOGVlZWNkZGFiMzE4M2I0NmFmY2U3YzgxNmE1MCIsInN1YiI6IjY1NjliYTRiNjM1MzZhMDEzOTU0NjMzNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.RFgKOBdGyNPT6pw5lMqV8k7gtOQxhjPgRWL307fh9Mk");
 
-        TrendingActors tempTrendingActors = builder.build().get()
+        ActorsTMDB tempActorsTMDB = builder.build().get()
                 .uri(url).headers(h -> h.setBearerAuth("eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZGMyOGVlZWNkZGFiMzE4M2I0NmFmY2U3YzgxNmE1MCIsInN1YiI6IjY1NjliYTRiNjM1MzZhMDEzOTU0NjMzNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.RFgKOBdGyNPT6pw5lMqV8k7gtOQxhjPgRWL307fh9Mk"))
                 .retrieve()
-                .bodyToMono(TrendingActors.class)
+                .bodyToMono(ActorsTMDB.class)
                 .block();
 
-        assert tempTrendingActors != null;
+        assert tempActorsTMDB != null;
 
-        return tempTrendingActors.getResults();
+        return tempActorsTMDB.getResults();
 
     }
 

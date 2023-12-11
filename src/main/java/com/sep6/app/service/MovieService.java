@@ -1,7 +1,7 @@
 package com.sep6.app.service;
 
-import com.sep6.app.TrendingMovie;
-import com.sep6.app.TrendingMovies;
+import com.sep6.app.MovieTMDB;
+import com.sep6.app.MoviesTMDB;
 import com.sep6.app.model.Movie;
 import com.sep6.app.repository.MovieRepository;
 import com.sep6.app.service.movieDTO.MovieDetails;
@@ -9,11 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 @Slf4j
 @Service
@@ -69,7 +66,7 @@ public class MovieService
 
     }
 
-    public com.sep6.app.Movie[] getTrendingMovies(){
+    public MovieTMDB[] getTrendingMovies(){
 
         WebClient.Builder builder = WebClient.builder();
 
@@ -77,14 +74,14 @@ public class MovieService
 
         builder.defaultHeader("Token","eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZGMyOGVlZWNkZGFiMzE4M2I0NmFmY2U3YzgxNmE1MCIsInN1YiI6IjY1NjliYTRiNjM1MzZhMDEzOTU0NjMzNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.RFgKOBdGyNPT6pw5lMqV8k7gtOQxhjPgRWL307fh9Mk");
 
-        TrendingMovies tempTrendingMovies = builder.build().get()
+        MoviesTMDB tempMoviesTMDB = builder.build().get()
                 .uri(url).headers(h -> h.setBearerAuth("eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZGMyOGVlZWNkZGFiMzE4M2I0NmFmY2U3YzgxNmE1MCIsInN1YiI6IjY1NjliYTRiNjM1MzZhMDEzOTU0NjMzNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.RFgKOBdGyNPT6pw5lMqV8k7gtOQxhjPgRWL307fh9Mk"))
                 .retrieve()
-                .bodyToMono(TrendingMovies.class)
+                .bodyToMono(MoviesTMDB.class)
                 .block();
 
-        assert tempTrendingMovies != null;
-        return tempTrendingMovies.getResults();
+        assert tempMoviesTMDB != null;
+        return tempMoviesTMDB.getResults();
 
     }
 }

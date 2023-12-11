@@ -3,7 +3,7 @@ package com.sep6.app;
 public class SearchActors
 {
     int page;
-    Actor[] results;
+    ActorTMDB[] results;
     int total_pages;
     int total_results;
 
@@ -19,11 +19,11 @@ public class SearchActors
         this.page = page;
     }
 
-    public Actor[] getResults() {
+    public ActorTMDB[] getResults() {
         return results;
     }
 
-    public void setResults(Actor[] results) {
+    public void setResults(ActorTMDB[] results) {
         this.results = results;
     }
 
