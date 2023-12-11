@@ -1,5 +1,6 @@
 package com.sep6.app.service;
 
+import com.sep6.app.Actor;
 import com.sep6.app.TrendingActor;
 import com.sep6.app.TrendingActors;
 import com.sep6.app.repository.ActorRepository;
@@ -20,7 +21,7 @@ public class ActorService {
         this.actorRepository = actorRepository;
     }
 
-    public List<TrendingActor> getTrendingActors(){
+    public Actor[] getTrendingActors(){
 
         WebClient.Builder builder = WebClient.builder();
 
@@ -36,19 +37,7 @@ public class ActorService {
 
         assert tempTrendingActors != null;
 
-        ArrayList<TrendingActor> trendingActors = new ArrayList<>();
-
-        for(int i = 0 ; i < 6 ; i++){
-            trendingActors.add(
-                    new TrendingActor(
-                            tempTrendingActors.getResults()[i].getId(),
-                            tempTrendingActors.getResults()[i].getName(),
-                            tempTrendingActors.getResults()[i].getProfile_path()
-                    )
-            );
-        }
-
-        return trendingActors;
+        return tempTrendingActors.getResults();
 
     }
 

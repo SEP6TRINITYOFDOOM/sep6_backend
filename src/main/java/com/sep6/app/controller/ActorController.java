@@ -1,5 +1,6 @@
 package com.sep6.app.controller;
 
+import com.sep6.app.Actor;
 import com.sep6.app.TrendingActor;
 import com.sep6.app.service.ActorService;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,7 +20,7 @@ public class ActorController {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/actors/trending")
-    public List<TrendingActor> getTrendingActors(){
+    public Actor[] getTrendingActors(){
         return this.actorService.getTrendingActors();
     }
 
