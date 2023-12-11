@@ -1,44 +1,38 @@
 package com.sep6.app.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.sep6.app.*;
-import com.sep6.app.Movie;
+import com.sep6.app.service.DTO.ActorTMDB;
+import com.sep6.app.service.DTO.MovieTMDB;
 
 public class SearchResults
 {
-    private ArrayList<SearchActor> actorResults;
-    private ArrayList<SearchMovie> movieResults;
+    private ActorTMDB[] actorResults;
+    private MovieTMDB[] movieResults;
 
-    public SearchResults(ArrayList<SearchActor> actorResults, ArrayList<SearchMovie> movieResults)
+    public SearchResults(ActorTMDB[] actorResults, MovieTMDB[] movieResults)
     {
         this.actorResults = actorResults;
         this.movieResults = movieResults;
     }
 
-    public SearchResults()
-    {
-        this.actorResults = new ArrayList<>();
-        this.movieResults = new ArrayList<>();
+    public SearchResults(){
     }
 
-    public ArrayList<SearchActor> getActorResults()
+    public ActorTMDB[] getActorResults()
     {
         return actorResults;
     }
 
-    public void setActorResults(ArrayList<SearchActor> actorResults)
+    public void setActorResults(ActorTMDB[] actorResults)
     {
         this.actorResults = actorResults;
     }
 
-    public ArrayList<SearchMovie> getMovieResults()
+    public MovieTMDB[] getMovieResults()
     {
         return movieResults;
     }
 
-    public void setMovieResults(ArrayList<SearchMovie> movieResults)
+    public void setMovieResults(MovieTMDB[] movieResults)
     {
         this.movieResults = movieResults;
     }

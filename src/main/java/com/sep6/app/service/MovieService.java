@@ -1,18 +1,16 @@
 package com.sep6.app.service;
 
-import com.sep6.app.TrendingMovie;
-import com.sep6.app.TrendingMovies;
+import com.sep6.app.service.DTO.MovieTMDB;
+import com.sep6.app.service.DTO.MoviesTMDB;
 import com.sep6.app.model.Movie;
 import com.sep6.app.repository.MovieRepository;
+import com.sep6.app.service.DTO.MovieDetails;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 @Slf4j
 @Service
@@ -30,6 +28,8 @@ public class MovieService
     public String sayHello(){
         return "Hello";
     }
+
+
 
     public List<Movie> findAllMovies()
     {
@@ -49,7 +49,24 @@ public class MovieService
         return this.movieRepository.findMovieByGenre_id(genre);
     }*/
 
-    public List<TrendingMovie> getTrendingMovies(){
+    public MovieDetails getMovieDetails(String id){
+
+        WebClient.Builder builder = WebClient.builder();
+
+        String url = "https://api.themoviedb.org/3/movie/" + id + "?language=en-US";
+
+        MovieDetails movieDetails = builder.build().get()
+                .uri(url).headers(h -> h.setBearerAuth("eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZGMyOGVlZWNkZGFiMzE4M2I0NmFmY2U3YzgxNmE1MCIsInN1YiI6IjY1NjliYTRiNjM1MzZhMDEzOTU0NjMzNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.RFgKOBdGyNPT6pw5lMqV8k7gtOQxhjPgRWL307fh9Mk"))
+                .retrieve()
+                .bodyToMono(MovieDetails.class)
+                .block();
+
+        assert movieDetails != null;
+        return movieDetails;
+
+    }
+
+    public MovieTMDB[] getTrendingMovies(){
 
         WebClient.Builder builder = WebClient.builder();
 
@@ -57,30 +74,14 @@ public class MovieService
 
         builder.defaultHeader("Token","eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZGMyOGVlZWNkZGFiMzE4M2I0NmFmY2U3YzgxNmE1MCIsInN1YiI6IjY1NjliYTRiNjM1MzZhMDEzOTU0NjMzNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.RFgKOBdGyNPT6pw5lMqV8k7gtOQxhjPgRWL307fh9Mk");
 
-        TrendingMovies tempTrendingMovies = builder.build().get()
+        MoviesTMDB tempMoviesTMDB = builder.build().get()
                 .uri(url).headers(h -> h.setBearerAuth("eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZGMyOGVlZWNkZGFiMzE4M2I0NmFmY2U3YzgxNmE1MCIsInN1YiI6IjY1NjliYTRiNjM1MzZhMDEzOTU0NjMzNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.RFgKOBdGyNPT6pw5lMqV8k7gtOQxhjPgRWL307fh9Mk"))
                 .retrieve()
-                .bodyToMono(TrendingMovies.class)
+                .bodyToMono(MoviesTMDB.class)
                 .block();
 
-        assert tempTrendingMovies != null;
-
-        ArrayList<TrendingMovie> trendingMovies = new ArrayList<>();
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        formatter = formatter.withLocale(Locale.getDefault() );  // Locale specifies human language for translating, and cultural norms for lowercase/uppercase and abbreviations and such. Example: Locale.US or Locale.CANADA_FRENCH
-
-        for(int i = 0 ; i < 12 ; i++) {
-            trendingMovies.add(new TrendingMovie(
-                    tempTrendingMovies.getResults()[i].getId(),
-                    tempTrendingMovies.getResults()[i].getTitle(),
-                    LocalDate.parse(tempTrendingMovies.getResults()[i].getRelease_date(), formatter).getYear(),
-                    tempTrendingMovies.getResults()[i].getGenre_ids()[0],
-                    tempTrendingMovies.getResults()[i].getPoster_path()
-            ));
-        }
-
-        return trendingMovies;
+        assert tempMoviesTMDB != null;
+        return tempMoviesTMDB.getResults();
 
     }
 }

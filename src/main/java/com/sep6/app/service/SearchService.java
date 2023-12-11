@@ -1,16 +1,15 @@
 package com.sep6.app.service;
 
-import com.sep6.app.*;
 import com.sep6.app.model.SearchResults;
 import com.sep6.app.repository.MovieRepository;
 import com.sep6.app.repository.PersonRepository;
+import com.sep6.app.service.DTO.ActorTMDB;
+import com.sep6.app.service.DTO.ActorsTMDB;
+import com.sep6.app.service.DTO.MovieTMDB;
+import com.sep6.app.service.DTO.MoviesTMDB;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Locale;
 @Service
 public class SearchService
 {
@@ -24,8 +23,6 @@ public class SearchService
         this.personRepository = personRepository;
         this.movieRepository = movieRepository;
     }
-
-
 
     public PersonRepository getPersonRepository()
     {
@@ -54,77 +51,43 @@ public class SearchService
         return searchResults;
     }
 
-    public ArrayList<SearchMovie> searchMovies(String searchParam)
+    public MovieTMDB[] searchMovies(String searchParam)
     {
         WebClient.Builder builder = WebClient.builder();
 
-        String url = "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc";
+        String url = "https://api.themoviedb.org/3/search/movie?query=" + searchParam + "&include_adult=false&language=en-US&page=1";
 
         builder.defaultHeader("Token","eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZGMyOGVlZWNkZGFiMzE4M2I0NmFmY2U3YzgxNmE1MCIsInN1YiI6IjY1NjliYTRiNjM1MzZhMDEzOTU0NjMzNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.RFgKOBdGyNPT6pw5lMqV8k7gtOQxhjPgRWL307fh9Mk");
 
-        SearchMovies tempMovies = builder.build().get()
+        MoviesTMDB tempMovies = builder.build().get()
                 .uri(url).headers(h -> h.setBearerAuth("eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZGMyOGVlZWNkZGFiMzE4M2I0NmFmY2U3YzgxNmE1MCIsInN1YiI6IjY1NjliYTRiNjM1MzZhMDEzOTU0NjMzNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.RFgKOBdGyNPT6pw5lMqV8k7gtOQxhjPgRWL307fh9Mk"))
                 .retrieve()
-                .bodyToMono(SearchMovies.class)
+                .bodyToMono(MoviesTMDB.class)
                 .block();
 
         assert tempMovies != null;
 
-        ArrayList<SearchMovie> resultMovies = new ArrayList<>();
+        searchResults.setMovieResults(tempMovies.getResults());
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        formatter = formatter.withLocale(Locale.getDefault() );  // Locale specifies human language for translating, and cultural norms for lowercase/uppercase and abbreviations and such. Example: Locale.US or Locale.CANADA_FRENCH
-
-        for (Movie movie: tempMovies.getResults()) {
-            if (movie.getTitle().contains(searchParam))
-            {
-                resultMovies.add(new SearchMovie(
-                            movie.getId(),
-                            movie.getTitle(),
-                            LocalDate.parse(movie.getRelease_date(), formatter).getYear(),
-                            movie.getGenre_ids()[0],
-                            movie.getPoster_path()
-                        ));
-            };
-        }
-
-        searchResults.setMovieResults(resultMovies);
-        return resultMovies;
+        return tempMovies.getResults();
     }
 
-    public ArrayList<SearchActor> searchActor(String searchParam)
+    public ActorTMDB[] searchActor(String searchParam)
     {
         WebClient.Builder builder = WebClient.builder();
 
-        String url = "https://api.themoviedb.org/3/person/popular?language=en-US&page=1";
+        String url = "https://api.themoviedb.org/3/search/person?query=" + searchParam + "&include_adult=false&language=en-US&page=1";
 
-        builder.defaultHeader("Token","eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZGMyOGVlZWNkZGFiMzE4M2I0NmFmY2U3YzgxNmE1MCIsInN1YiI6IjY1NjliYTRiNjM1MzZhMDEzOTU0NjMzNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.RFgKOBdGyNPT6pw5lMqV8k7gtOQxhjPgRWL307fh9Mk");
-
-        SearchActors tempActors = builder.build().get()
+        ActorsTMDB tempActors = builder.build().get()
                 .uri(url).headers(h -> h.setBearerAuth("eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZGMyOGVlZWNkZGFiMzE4M2I0NmFmY2U3YzgxNmE1MCIsInN1YiI6IjY1NjliYTRiNjM1MzZhMDEzOTU0NjMzNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.RFgKOBdGyNPT6pw5lMqV8k7gtOQxhjPgRWL307fh9Mk"))
                 .retrieve()
-                .bodyToMono(SearchActors.class)
+                .bodyToMono(ActorsTMDB.class)
                 .block();
 
         assert tempActors != null;
 
-        ArrayList<SearchActor> resultActors = new ArrayList<>();
+        searchResults.setActorResults(tempActors.getResults());
 
-        for (Actor actor:tempActors.getResults())
-        {
-            if (actor.getName().contains(searchParam))
-            {
-                resultActors.add(
-                        new SearchActor(
-                                actor.getId(),
-                                actor.getName(),
-                                actor.getProfile_path()
-                        )
-                );
-            }
-        }
-
-        searchResults.setActorResults(resultActors);
-        return resultActors;
+        return tempActors.getResults();
     }
 }

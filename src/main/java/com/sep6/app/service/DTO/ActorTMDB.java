@@ -1,8 +1,8 @@
-package com.sep6.app;
+package com.sep6.app.service.DTO;
 
-public class Actor {
+public class ActorTMDB {
 
-    public Actor(){
+    public ActorTMDB(){
 
     }
 
@@ -13,7 +13,7 @@ public class Actor {
     String original_name;
     float popularity;
     String profile_path;
-    Movie[] known_for;
+    MovieTMDB[] known_for;
 
     public int getGender() {
         return gender;
@@ -71,11 +71,11 @@ public class Actor {
         this.profile_path = profile_path;
     }
 
-    public Movie[] getKnown_for() {
+    public MovieTMDB[] getKnown_for() {
         return known_for;
     }
 
-    public void setKnown_for(Movie[] known_for) {
+    public void setKnown_for(MovieTMDB[] known_for) {
         this.known_for = known_for;
     }
 }

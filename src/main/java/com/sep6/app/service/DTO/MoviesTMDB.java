@@ -1,15 +1,15 @@
-package com.sep6.app;
+package com.sep6.app.service.DTO;
 
-public class SearchMovies
-{
-    int page;
-    Movie[] results;
-    int total_pages;
-    int total_results;
+public class MoviesTMDB {
 
-    public SearchMovies(){
+    public MoviesTMDB(){
 
     }
+
+    int page;
+    MovieTMDB[] results;
+    int total_pages;
+    int total_results;
 
     public int getPage() {
         return page;
@@ -19,11 +19,11 @@ public class SearchMovies
         this.page = page;
     }
 
-    public Movie[] getResults() {
+    public MovieTMDB[] getResults() {
         return results;
     }
 
-    public void setResults(Movie[] results) {
+    public void setResults(MovieTMDB[] results) {
         this.results = results;
     }
 
