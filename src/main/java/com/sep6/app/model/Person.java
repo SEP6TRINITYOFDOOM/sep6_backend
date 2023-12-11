@@ -4,7 +4,7 @@ import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 
 @Entity(name = "people")
-@Table(name = "people")
+@Table(name = "person")
 public class Person {
 
     @Id
