@@ -1,4 +1,4 @@
-package com.sep6.app;
+package com.sep6.app.service.DTO;
 
 public class ActorTMDB {
 

@@ -1,7 +1,7 @@
 package com.sep6.app.service;
 
-import com.sep6.app.ActorTMDB;
-import com.sep6.app.ActorsTMDB;
+import com.sep6.app.service.DTO.ActorTMDB;
+import com.sep6.app.service.DTO.ActorsTMDB;
 import com.sep6.app.repository.ActorRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

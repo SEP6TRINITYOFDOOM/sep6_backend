@@ -1,13 +1,11 @@
 package com.sep6.app.model;
 
-import com.sep6.app.ActorTMDB;
-import com.sep6.app.MovieTMDB;
+import com.sep6.app.service.DTO.ActorTMDB;
+import com.sep6.app.service.DTO.MovieTMDB;
 
 public class SearchResults
 {
-    //private ArrayList<SearchActor> actorResults;
     private ActorTMDB[] actorResults;
-    //private ArrayList<SearchMovie> movieResults;
     private MovieTMDB[] movieResults;
 
     public SearchResults(ActorTMDB[] actorResults, MovieTMDB[] movieResults)

@@ -1,14 +1,15 @@
 package com.sep6.app.service;
 
-import com.sep6.app.ActorTMDB;
-import com.sep6.app.MovieTMDB;
-import com.sep6.app.SearchActors;
-import com.sep6.app.SearchMovies;
 import com.sep6.app.model.SearchResults;
 import com.sep6.app.repository.MovieRepository;
 import com.sep6.app.repository.PersonRepository;
+import com.sep6.app.service.DTO.ActorTMDB;
+import com.sep6.app.service.DTO.ActorsTMDB;
+import com.sep6.app.service.DTO.MovieTMDB;
+import com.sep6.app.service.DTO.MoviesTMDB;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+
 @Service
 public class SearchService
 {
@@ -22,9 +23,6 @@ public class SearchService
         this.personRepository = personRepository;
         this.movieRepository = movieRepository;
     }
-
-
-
 
     public PersonRepository getPersonRepository()
     {
@@ -61,10 +59,10 @@ public class SearchService
 
         builder.defaultHeader("Token","eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZGMyOGVlZWNkZGFiMzE4M2I0NmFmY2U3YzgxNmE1MCIsInN1YiI6IjY1NjliYTRiNjM1MzZhMDEzOTU0NjMzNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.RFgKOBdGyNPT6pw5lMqV8k7gtOQxhjPgRWL307fh9Mk");
 
-        SearchMovies tempMovies = builder.build().get()
+        MoviesTMDB tempMovies = builder.build().get()
                 .uri(url).headers(h -> h.setBearerAuth("eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZGMyOGVlZWNkZGFiMzE4M2I0NmFmY2U3YzgxNmE1MCIsInN1YiI6IjY1NjliYTRiNjM1MzZhMDEzOTU0NjMzNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.RFgKOBdGyNPT6pw5lMqV8k7gtOQxhjPgRWL307fh9Mk"))
                 .retrieve()
-                .bodyToMono(SearchMovies.class)
+                .bodyToMono(MoviesTMDB.class)
                 .block();
 
         assert tempMovies != null;
@@ -80,10 +78,10 @@ public class SearchService
 
         String url = "https://api.themoviedb.org/3/search/person?query=" + searchParam + "&include_adult=false&language=en-US&page=1";
 
-        SearchActors tempActors = builder.build().get()
+        ActorsTMDB tempActors = builder.build().get()
                 .uri(url).headers(h -> h.setBearerAuth("eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZGMyOGVlZWNkZGFiMzE4M2I0NmFmY2U3YzgxNmE1MCIsInN1YiI6IjY1NjliYTRiNjM1MzZhMDEzOTU0NjMzNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.RFgKOBdGyNPT6pw5lMqV8k7gtOQxhjPgRWL307fh9Mk"))
                 .retrieve()
-                .bodyToMono(SearchActors.class)
+                .bodyToMono(ActorsTMDB.class)
                 .block();
 
         assert tempActors != null;

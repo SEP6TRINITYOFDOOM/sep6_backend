@@ -1,4 +1,4 @@
-package com.sep6.app.service.movieDTO;
+package com.sep6.app.service.DTO;
 
 public class SpokenLanguage {
     public String english_name;

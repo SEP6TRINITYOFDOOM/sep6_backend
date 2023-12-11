@@ -1,15 +1,14 @@
-package com.sep6.app;
+package com.sep6.app.service.DTO;
 
-public class SearchActors
-{
+public class ActorsTMDB {
+    public ActorsTMDB(){
+
+    }
+
     int page;
     ActorTMDB[] results;
     int total_pages;
     int total_results;
-
-    public SearchActors(){
-
-    }
 
     public int getPage() {
         return page;

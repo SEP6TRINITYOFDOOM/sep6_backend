@@ -1,12 +1,13 @@
-package com.sep6.app;
+package com.sep6.app.service.DTO;
 
-public class ActorsTMDB {
-    public ActorsTMDB(){
+public class MoviesTMDB {
+
+    public MoviesTMDB(){
 
     }
 
     int page;
-    ActorTMDB[] results;
+    MovieTMDB[] results;
     int total_pages;
     int total_results;
 
@@ -18,11 +19,11 @@ public class ActorsTMDB {
         this.page = page;
     }
 
-    public ActorTMDB[] getResults() {
+    public MovieTMDB[] getResults() {
         return results;
     }
 
-    public void setResults(ActorTMDB[] results) {
+    public void setResults(MovieTMDB[] results) {
         this.results = results;
     }
 

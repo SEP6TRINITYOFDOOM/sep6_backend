@@ -1,4 +1,4 @@
-package com.sep6.app.service.movieDTO;
+package com.sep6.app.service.DTO;
 
 public class ProductionCompany {
     public int id;

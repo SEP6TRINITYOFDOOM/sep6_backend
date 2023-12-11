@@ -1,7 +1,7 @@
 package com.sep6.app.controller;
 
-import com.sep6.app.ActorTMDB;
-import com.sep6.app.MovieTMDB;
+import com.sep6.app.service.DTO.ActorTMDB;
+import com.sep6.app.service.DTO.MovieTMDB;
 import com.sep6.app.model.SearchResults;
 import com.sep6.app.service.SearchService;
 import org.springframework.web.bind.annotation.GetMapping;

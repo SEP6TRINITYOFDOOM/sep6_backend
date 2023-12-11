@@ -1,10 +1,10 @@
 package com.sep6.app.service;
 
-import com.sep6.app.MovieTMDB;
-import com.sep6.app.MoviesTMDB;
+import com.sep6.app.service.DTO.MovieTMDB;
+import com.sep6.app.service.DTO.MoviesTMDB;
 import com.sep6.app.model.Movie;
 import com.sep6.app.repository.MovieRepository;
-import com.sep6.app.service.movieDTO.MovieDetails;
+import com.sep6.app.service.DTO.MovieDetails;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;

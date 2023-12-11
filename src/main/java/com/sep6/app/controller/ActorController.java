@@ -1,6 +1,6 @@
 package com.sep6.app.controller;
 
-import com.sep6.app.ActorTMDB;
+import com.sep6.app.service.DTO.ActorTMDB;
 import com.sep6.app.service.ActorService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
