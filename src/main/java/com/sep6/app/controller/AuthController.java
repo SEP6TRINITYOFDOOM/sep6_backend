@@ -63,13 +63,13 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> register (@RequestBody AuthenticationRequest auth){
+    public ResponseEntity<String> register(@RequestBody AuthenticationRequest auth) {
 
-        if(userRepository.existsByUsername(auth.username())){
+        if (userRepository.existsByUsername(auth.username())) {
             return ResponseEntity.badRequest().body("Username is taken");
         }
 
-        User user = userRepository.save(new User(auth.username(), passwordEncoder.encode(auth.password())));
+        User user = userRepository.save(new User(auth.email(), auth.username(), passwordEncoder.encode(auth.password())));
 
         return ResponseEntity.ok("Register successful for user:" + user.getUsername());
 
