@@ -66,6 +66,22 @@ public class SearchService
 
         assert tempMovies != null;
 
+        ArrayList<Integer> tempGenres = new ArrayList<>();
+
+        for(int i = 0 ; i < tempMovies.getResults().length ; i++){
+            for(int j = 0 ; j < tempMovies.getResults()[i].getGenre_ids().length ; j++){
+                addUniqueGenre(tempGenres, tempMovies.getResults()[i].getGenre_ids()[j] );
+            }
+        }
+
+        Integer[] genres = new Integer[tempGenres.size()];
+
+        for (int i = 0 ; i < tempGenres.size() ; i++){
+            genres[i] = tempGenres.get(i);
+        }
+
+        searchResults.setGenres(genres);
+
         searchResults.setMovieResults(tempMovies.getResults());
 
         return tempMovies.getResults();
@@ -82,6 +98,7 @@ public class SearchService
                 .retrieve()
                 .bodyToMono(ActorsTMDB.class)
                 .block();
+
 
         for(int i = 0 ; i < tempActors.getResults().length ; i++){
             if(tempActors.getResults()[i].getProfile_path() == null){
