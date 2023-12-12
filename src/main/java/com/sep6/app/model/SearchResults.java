@@ -7,11 +7,13 @@ public class SearchResults
 {
     private ActorTMDB[] actorResults;
     private MovieTMDB[] movieResults;
+    private Integer[] genres;
 
-    public SearchResults(ActorTMDB[] actorResults, MovieTMDB[] movieResults)
+    public SearchResults(ActorTMDB[] actorResults, MovieTMDB[] movieResults, Integer[] genres)
     {
         this.actorResults = actorResults;
         this.movieResults = movieResults;
+        this.genres = genres;
     }
 
     public SearchResults(){
@@ -30,6 +32,14 @@ public class SearchResults
     public MovieTMDB[] getMovieResults()
     {
         return movieResults;
+    }
+
+    public Integer[] getGenres() {
+        return genres;
+    }
+
+    public void setGenres(Integer[] genres) {
+        this.genres = genres;
     }
 
     public void setMovieResults(MovieTMDB[] movieResults)
