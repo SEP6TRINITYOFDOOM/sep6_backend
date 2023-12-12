@@ -23,6 +23,12 @@ public class SearchController
     {
         return this.searchService.searchAll(param);
     }
+
+    @GetMapping("/search/{param}/{genre}")
+    public SearchResults getAllResultsWithGenre(@PathVariable String param, @PathVariable int genre)
+    {
+        return this.searchService.searchAllWithGenre(param, genre);
+    }
     @GetMapping("/search/movie/{param}")
     public MovieTMDB[] getMovieResults(@PathVariable String param)
     {
