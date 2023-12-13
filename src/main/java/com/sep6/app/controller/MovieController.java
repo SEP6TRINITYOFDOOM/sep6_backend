@@ -1,12 +1,10 @@
 package com.sep6.app.controller;
 
+import com.sep6.app.service.DTO.MovieCredits;
 import com.sep6.app.service.DTO.MovieTMDB;
 import com.sep6.app.service.MovieService;
 import com.sep6.app.service.DTO.MovieDetails;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class MovieController {
@@ -45,13 +43,16 @@ public class MovieController {
         return this.movieService.getMovieDetails(id);
     }
 
-
-
-
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/movies/trending")
     public MovieTMDB[] getTrendingMovies(){
         return this.movieService.getTrendingMovies();
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/movie/{id}/credits")
+    public MovieCredits getCredits(@PathVariable String id){
+        return this.movieService.getCastAndCrew(id);
     }
 
 }

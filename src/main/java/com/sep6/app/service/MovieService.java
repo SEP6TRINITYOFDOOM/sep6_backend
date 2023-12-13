@@ -1,6 +1,7 @@
 package com.sep6.app.service;
 
 import com.sep6.app.repository.MovieRepository;
+import com.sep6.app.service.DTO.MovieCredits;
 import com.sep6.app.service.DTO.MovieDetails;
 import com.sep6.app.service.DTO.MovieTMDB;
 import com.sep6.app.service.DTO.MoviesTMDB;
@@ -52,6 +53,24 @@ public class MovieService
 
         assert tempMoviesTMDB != null;
         return tempMoviesTMDB.getResults();
+    }
 
+    public MovieCredits getCastAndCrew(String id){
+        WebClient.Builder builder = WebClient.builder();
+
+        String url = "https://api.themoviedb.org/3/movie/" + id + "/credits?language=en-US";
+
+        builder.defaultHeader("Token","eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZGMyOGVlZWNkZGFiMzE4M2I0NmFmY2U3YzgxNmE1MCIsInN1YiI6IjY1NjliYTRiNjM1MzZhMDEzOTU0NjMzNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.RFgKOBdGyNPT6pw5lMqV8k7gtOQxhjPgRWL307fh9Mk");
+
+        MovieCredits crewAndCast = builder.build().get()
+                .uri(url).headers(h -> h.setBearerAuth("eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZGMyOGVlZWNkZGFiMzE4M2I0NmFmY2U3YzgxNmE1MCIsInN1YiI6IjY1NjliYTRiNjM1MzZhMDEzOTU0NjMzNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.RFgKOBdGyNPT6pw5lMqV8k7gtOQxhjPgRWL307fh9Mk"))
+                .retrieve()
+                .bodyToMono(MovieCredits.class)
+                .block();
+
+
+
+        assert crewAndCast != null;
+        return crewAndCast;
     }
 }

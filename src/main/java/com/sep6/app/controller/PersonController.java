@@ -1,21 +1,28 @@
 package com.sep6.app.controller;
 
 import com.sep6.app.model.Person;
-import com.sep6.app.repository.PersonRepository;
+import com.sep6.app.service.DTO.MovieCredits;
+import com.sep6.app.service.PersonService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class PersonController {
 
-    private final PersonRepository personRepository;
+    private PersonService personService;
 
-    public PersonController(PersonRepository personRepository) {
-        this.personRepository = personRepository;
+    public PersonController(PersonService personService) {
+        this.personService = personService;
     }
 
     @GetMapping("/people")
     public Iterable<Person> findAllPeople(){
-        return this.personRepository.findAll();
+        return personService.getAll();
+    }
+
+    @GetMapping("/person/{id}")
+    public MovieCredits getPerson(@PathVariable String id){
+        return this.personService.getFeaturedIn(id);
     }
 }
