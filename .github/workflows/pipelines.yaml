@@ -10,7 +10,7 @@ env:
   GKE_ZONE: europe-west3-a
   DEPLOYMENT_NAME: sep6-gke
   IMAGE: sep6-gke-image
-  TAG: 1.0.0
+  TAG: 1.0.1
 
 jobs:
   setup-build-publish-deploy:
