@@ -1,6 +1,5 @@
 package com.sep6.app.service;
 
-import com.sep6.app.repository.ActorRepository;
 import com.sep6.app.service.DTO.ActorDetails;
 import com.sep6.app.service.DTO.ActorTMDB;
 import com.sep6.app.service.DTO.ActorsTMDB;
@@ -12,10 +11,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 @Service
 public class ActorService {
 
-    private final ActorRepository actorRepository;
-
-    public ActorService(ActorRepository actorRepository){
-        this.actorRepository = actorRepository;
+    public ActorService(){
     }
 
     public ActorDetails getActorDetails(String id){

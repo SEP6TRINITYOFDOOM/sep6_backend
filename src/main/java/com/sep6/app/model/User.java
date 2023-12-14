@@ -18,6 +18,22 @@ public class User {
 
     }
 
+    public User(String email, String username, String password) {
+        this.email = email;
+        this.username = username;
+        this.password = password;
+    }
+
+    public User(Integer id){
+        this.id = id;
+    }
+
+    public User(Integer id, String email, String username) {
+        this.id = id;
+        this.email = email;
+        this.username = username;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -32,12 +48,6 @@ public class User {
 
     public String getPassword() {
         return password;
-    }
-
-    public User(String email, String username, String password) {
-        this.email = email;
-        this.username = username;
-        this.password = password;
     }
 }
 

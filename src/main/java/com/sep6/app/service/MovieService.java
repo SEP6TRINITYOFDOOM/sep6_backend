@@ -1,8 +1,7 @@
 package com.sep6.app.service;
 
-import com.sep6.app.repository.MovieRepository;
-import com.sep6.app.service.DTO.MovieCredits;
 import com.sep6.app.service.DTO.MovieDetails;
+import com.sep6.app.service.DTO.MovieCredits;
 import com.sep6.app.service.DTO.MovieTMDB;
 import com.sep6.app.service.DTO.MoviesTMDB;
 import lombok.extern.slf4j.Slf4j;
@@ -13,11 +12,9 @@ import org.springframework.web.reactive.function.client.WebClient;
 @Service
 public class MovieService
 {
-    private MovieRepository movieRepository;
 
-    public MovieService(MovieRepository movieRepository)
-    {
-        this.movieRepository = movieRepository;
+    public MovieService() {
+
     }
 
     public MovieDetails getMovieDetails(String id){
