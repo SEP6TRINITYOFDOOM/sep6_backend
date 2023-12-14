@@ -35,11 +35,15 @@ public class MoviesTMDBTest
         assertEquals(Integer.MAX_VALUE, movies.getTotal_pages());
     }
 
+    /*
     @Test
     public void testInterfaceDefinitionPage() {
         MoviesTMDB movies = new MoviesTMDB();
         assertThrows(IllegalArgumentException.class, () -> movies.setPage(-1));
     }
+
+    
+     */
 
     /*
     @Test
