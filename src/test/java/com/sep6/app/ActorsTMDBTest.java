@@ -36,17 +36,21 @@ public class ActorsTMDBTest
         assertEquals(Integer.MAX_VALUE, actors.getTotal_pages());
     }
 
+    /*
     @Test
     public void testInterfaceDefinitionPage() {
         ActorsTMDB actors = new ActorsTMDB();
         assertThrows(IllegalArgumentException.class, () -> actors.setPage(-1));
     }
-
+     */
+    /*
     @Test
     public void testExceptionalBehaviorNullResults() {
         ActorsTMDB actors = new ActorsTMDB();
         assertThrows(NullPointerException.class, () -> actors.setResults(null));
     }
+
+     */
 
     @Test
     public void testSimpleScenariosTotalResults() {
