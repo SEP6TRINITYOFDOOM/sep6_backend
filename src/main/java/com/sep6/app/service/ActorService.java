@@ -1,8 +1,9 @@
 package com.sep6.app.service;
 
+import com.sep6.app.repository.ActorRepository;
+import com.sep6.app.service.DTO.ActorDetails;
 import com.sep6.app.service.DTO.ActorTMDB;
 import com.sep6.app.service.DTO.ActorsTMDB;
-import com.sep6.app.repository.ActorRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -15,6 +16,22 @@ public class ActorService {
 
     public ActorService(ActorRepository actorRepository){
         this.actorRepository = actorRepository;
+    }
+
+    public ActorDetails getActorDetails(String id){
+
+        WebClient.Builder builder = WebClient.builder();
+
+        String url = "https://api.themoviedb.org/3/person/" + id +"?language=en-US";
+
+        ActorDetails actorDetails = builder.build().get()
+                .uri(url).headers(h -> h.setBearerAuth("eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZGMyOGVlZWNkZGFiMzE4M2I0NmFmY2U3YzgxNmE1MCIsInN1YiI6IjY1NjliYTRiNjM1MzZhMDEzOTU0NjMzNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.RFgKOBdGyNPT6pw5lMqV8k7gtOQxhjPgRWL307fh9Mk"))
+                .retrieve()
+                .bodyToMono(ActorDetails.class)
+                .block();
+
+        assert actorDetails != null;
+        return actorDetails;
     }
 
     public ActorTMDB[] getTrendingActors(){
@@ -36,5 +53,7 @@ public class ActorService {
         return tempActorsTMDB.getResults();
 
     }
+
+
 
 }

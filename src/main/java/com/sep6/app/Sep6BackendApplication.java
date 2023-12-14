@@ -8,5 +8,6 @@ public class Sep6BackendApplication {
     public static void main(String[] args) {
         SpringApplication.run(Sep6BackendApplication.class, args);
     }
+
 }
 
