@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sep6_backend-gke
+  name: sep6-backend-gke
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: sep6_backend-gke
+      app: sep6-backend-gke
   template:
     metadata:
       labels:
-        app: sep6_backend-gke
+        app: sep6-backend-gke
     spec:
       containers:
         - name: app

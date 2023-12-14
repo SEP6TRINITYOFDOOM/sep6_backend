@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: sep6_backend-gke
+  name: sep6-backend-gke
 spec:
   selector:
-    app: sep6_backend-gke
+    app: sep6-backend-gke
   type: LoadBalancer
   ports:
     - port: 8080
