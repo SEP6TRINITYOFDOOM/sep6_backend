@@ -1,6 +1,5 @@
 package com.sep6.app.repository;
 
-import com.sep6.app.model.Movie;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.Repository;
 

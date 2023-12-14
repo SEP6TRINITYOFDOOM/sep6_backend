@@ -131,4 +131,10 @@ public class MovieTMDB {
     public void setVote_count(int vote_count) {
         this.vote_count = vote_count;
     }
+
+    public MovieTMDB(int id, String title, String poster_path) {
+        this.id = id;
+        this.title = title;
+        this.poster_path = poster_path;
+    }
 }

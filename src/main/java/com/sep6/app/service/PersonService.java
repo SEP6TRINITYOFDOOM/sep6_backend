@@ -1,7 +1,5 @@
 package com.sep6.app.service;
 
-import com.sep6.app.model.Person;
-import com.sep6.app.repository.PersonRepository;
 import com.sep6.app.service.DTO.Cast;
 import com.sep6.app.service.DTO.Crew;
 import com.sep6.app.service.DTO.MovieCredits;
@@ -15,14 +13,7 @@ import java.util.Arrays;
 @Service
 public class PersonService {
 
-    private final PersonRepository personRepository;
-
-    public PersonService(PersonRepository personRepository){
-        this.personRepository = personRepository;
-    }
-
-    public Iterable<Person> getAll(){
-        return this.personRepository.findAll();
+    public PersonService(){
     }
 
     public MovieCredits getFeaturedIn(String id){
@@ -32,7 +23,7 @@ public class PersonService {
 
         builder.defaultHeader("Token","eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZGMyOGVlZWNkZGFiMzE4M2I0NmFmY2U3YzgxNmE1MCIsInN1YiI6IjY1NjliYTRiNjM1MzZhMDEzOTU0NjMzNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.RFgKOBdGyNPT6pw5lMqV8k7gtOQxhjPgRWL307fh9Mk");
 
-        MovieCredits movieCredits = null;
+        MovieCredits movieCredits;
 
         movieCredits = builder.build().get()
                 .uri(url).headers(h -> h.setBearerAuth("eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZGMyOGVlZWNkZGFiMzE4M2I0NmFmY2U3YzgxNmE1MCIsInN1YiI6IjY1NjliYTRiNjM1MzZhMDEzOTU0NjMzNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.RFgKOBdGyNPT6pw5lMqV8k7gtOQxhjPgRWL307fh9Mk"))
