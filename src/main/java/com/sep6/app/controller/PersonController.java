@@ -16,8 +16,7 @@ public class PersonController {
         this.personService = personService;
     }
 
-
-    @CrossOrigin(origins = "http://35.234.87.9:80")
+    
     @GetMapping("/person/{id}")
     public MovieCredits getPerson(@PathVariable String id) {
         return this.personService.getFeaturedIn(id);
