@@ -60,6 +60,7 @@ public class ActorTMDB {
     }
 
     public void setPopularity(float popularity) {
+
         this.popularity = popularity;
     }
 
