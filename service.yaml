@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sep6-gke
+spec:
+  selector:
+    app: sep6-gke
+  type: LoadBalancer
+  ports:
+    - port: 8080
+      targetPort: 8080
