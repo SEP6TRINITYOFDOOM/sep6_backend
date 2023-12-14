@@ -6,10 +6,10 @@ on:
       - main
 env:
   PROJECT_ID: ${{secrets.GKE_PROJECT}}
-  GKE_CLUSTER: sep6-gke
+  GKE_CLUSTER: sep6_backend-gke
   GKE_ZONE: europe-west3-a
-  DEPLOYMENT_NAME: sep6-gke
-  IMAGE: sep6-gke-image
+  DEPLOYMENT_NAME: sep6_backend-gke
+  IMAGE: sep6_backend-gke-image
   TAG: 1.0.1
 
 jobs:
