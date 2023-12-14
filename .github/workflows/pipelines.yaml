@@ -41,6 +41,10 @@ jobs:
         with:
           service_account_key: ${{secrets.GKE_SA_KEY}}
           project_id: ${{secrets.GKE_PROJECT}}
+      - name: setup-gke-gcloud-auth-plugin
+        # You may pin to the exact commit or the version.
+        # uses: simenandre/setup-gke-gcloud-auth-plugin@d54222d853c0423e3fd4706128ce0076718880fe
+        uses: simenandre/setup-gke-gcloud-auth-plugin@v1.1.2
 
       - name: Configure Docker
         run: |-
