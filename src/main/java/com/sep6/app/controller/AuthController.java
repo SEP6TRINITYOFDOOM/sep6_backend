@@ -1,6 +1,7 @@
 package com.sep6.app.controller;
 
 import com.sep6.app.controller.request.AuthenticationRequest;
+import com.sep6.app.controller.request.LoginResponse;
 import com.sep6.app.model.User;
 import com.sep6.app.repository.user.UserRepository;
 import org.springframework.http.ResponseEntity;
@@ -38,7 +39,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String auth(@RequestBody AuthenticationRequest auth) {
+    public LoginResponse auth(@RequestBody AuthenticationRequest auth) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(auth.username(), auth.password()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -59,7 +60,9 @@ public class AuthController {
                 .claim("scope", scope)
                 .build();
 
-        return this.jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
+        final User user = userRepository.findByUsername(auth.username());
+
+        return new LoginResponse(this.jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue(), user.getId());
     }
 
     @PostMapping("/register")
