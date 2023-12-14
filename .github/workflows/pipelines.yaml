@@ -14,41 +14,31 @@ env:
 
 jobs:
   setup-build-publish-deploy:
-    name: Setup Build Publish And Deploy
+    name: Setup, Build, Publish, and Deploy
     runs-on: ubuntu-latest
+    environment: production
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Setup JDK 17
-        uses: actions/setup-java@v1
+      # Setup gcloud CLI
+      - uses: google-github-actions/setup-gcloud@1bee7de035d65ec5da40a31f8589e240eba8fde5
         with:
-            java-version: 17
-            server-id: github
-            settings-path: ${{ github.workspace }}
+          service_account_key: ${{ secrets.GKE_SA_KEY }}
+          project_id: ${{ secrets.GKE_PROJECT }}
 
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
-
-      - name: Run build with Gradle Wrapper
-        run: ./gradlew build
-
-      - name: Setup Google Cloud CLI
-        uses: GoogleCloudPlatform/github-actions/setup-gcloud@0.1.3
-        env:
-          ACTIONS_ALLOW_UNSECURE_COMMANDS: true
-        with:
-          service_account_key: ${{secrets.GKE_SA_KEY}}
-          project_id: ${{secrets.GKE_PROJECT}}
-
-      - name: Configure Docker
-        run: |-
+      # Configure Docker to use the gcloud command-line tool as a credential
+      # helper for authentication
+      - run: |-
           gcloud --quiet auth configure-docker
 
-      - name: Get GKE Credentials
-        run: |-
-          gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
+      # Get the GKE credentials so we can deploy to the cluster
+      - uses: google-github-actions/get-gke-credentials@db150f2cc60d1716e61922b832eae71d2a45938f
+        with:
+          cluster_name: ${{ env.GKE_CLUSTER }}
+          location: ${{ env.GKE_ZONE }}
+          credentials: ${{ secrets.GKE_SA_KEY }}
 
       # Build the Docker image
       - name: Build
