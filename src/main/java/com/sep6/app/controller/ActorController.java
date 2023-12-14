@@ -20,13 +20,11 @@ public class ActorController {
         this.actorService = actorService;
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/actor/{id}")
     public ActorDetails getActorDetails(@PathVariable String id) throws IOException {
         return this.actorService.getActorDetails(id);
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/actors/trending")
     public ActorTMDB[] getTrendingActors(){
         return this.actorService.getTrendingActors();

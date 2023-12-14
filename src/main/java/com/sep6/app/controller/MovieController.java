@@ -16,19 +16,16 @@ public class MovieController {
     }
 
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/movies")
     public MovieDetails getMovieDetails(@RequestParam String id){
         return this.movieService.getMovieDetails(id);
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/movies/trending")
     public MovieTMDB[] getTrendingMovies(){
         return this.movieService.getTrendingMovies();
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/movie/{id}/credits")
     public MovieCredits getCredits(@PathVariable String id){
         return this.movieService.getCastAndCrew(id);
