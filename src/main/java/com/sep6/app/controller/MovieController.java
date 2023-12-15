@@ -8,15 +8,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class MovieController {
-
-    @GetMapping("")
-    public String get1(){
-        return "1.0.4";
-    }
-
-    @GetMapping("/")
-    public String get2(){
-        return "1.0.4";
+    @GetMapping("/ver")
+    public String getVersion(){
+        return new String(
+                "Version 1.0.5"
+        );
     }
 
     private final MovieService movieService;
