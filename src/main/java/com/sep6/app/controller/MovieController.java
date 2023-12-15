@@ -9,6 +9,16 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class MovieController {
 
+    @GetMapping("")
+    public String get1(){
+        return "1.0.4";
+    }
+
+    @GetMapping("/")
+    public String get2(){
+        return "1.0.4";
+    }
+
     private final MovieService movieService;
 
     public MovieController(MovieService movieService) {
