@@ -36,6 +36,7 @@ import org.springframework.web.filter.CorsFilter;
 
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -57,9 +58,7 @@ public class SecurityConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("http://localhost:4200");
-        config.addAllowedOrigin("http://35.242.246.160");
-        config.addAllowedOrigin("*");
+        config.setAllowedOrigins(List.of("http://localhost:4200","http://35.198.93.251:80","http://35.198.93.251"));
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
         source.registerCorsConfiguration("/**", config);
@@ -70,9 +69,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("http://localhost:4200");
-        config.addAllowedOrigin("http://35.242.246.160");
-        config.addAllowedOrigin("*");
+        config.setAllowedOrigins(List.of("http://localhost:4200","http://35.198.93.251:80","http://35.198.93.251"));
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
 
